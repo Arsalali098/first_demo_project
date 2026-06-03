@@ -1,3 +1,4 @@
+import 'package:first_demo_project/models/user.dart';
 import 'package:first_demo_project/widgets/Custom_Container_Widget.dart';
 import 'package:first_demo_project/widgets/User_Detailed.dart';
 import 'package:flutter/material.dart';
@@ -77,22 +78,28 @@ class _DashboardState extends State<Dashboard> {
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       itemCount: users.length,
                       itemBuilder: (context, index) {
-                        final user = users[index];
+                        final userMap = users[index];
+                        final user = UserElement.fromJson(userMap);
                         return Column(
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetailed()));
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UserDetailed(user: user),
+                                  ),
+                                );
                               },
                               child: CustomContainerWidget(
-                                imagePath: user['image'],
-                                title: '${user['firstName']} ${user['lastName']}',
-                                address: user['address']['address'],
-                                username: user['username'],
-                                email: user['email'],
-                                number: user['phone'],
-                                age: user['age'].toString(),
-                                aim: user['company']['title'],
+                                imagePath: user.image,
+                                title: '${user.firstName} ${user.lastName}',
+                                address: user.address.address,
+                                username: user.username,
+                                email: user.email,
+                                number: user.phone,
+                                age: user.age.toString(),
+                                aim: user.company.title,
                               ),
                             ),
                           ],
