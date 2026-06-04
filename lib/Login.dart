@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:first_demo_project/Dashboard.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -14,6 +16,7 @@ class LoginState extends State<Login> {
   bool isPassObscure = true;
   final formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
+  var passController = TextEditingController();
   static const String KEYLOGIN = "Login";
   static const String KEYNAME = 'name';
   final FocusScopeNode currentFocus = FocusScopeNode();
@@ -102,7 +105,7 @@ class LoginState extends State<Login> {
                         sharedprefrence.setBool(KEYLOGIN, true);
 
                         if (formKey.currentState!.validate()) {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Dashboard(),
@@ -172,5 +175,23 @@ class LoginState extends State<Login> {
         );
       }
     }
+  }
+
+  void LoginUser(dynamic password, dynamic name) async{
+      var url = "https://dummyjson.com/auth/login";
+      var data = {
+        "name" : name.text,
+        "password" : password.text
+      };
+      var body = json.encode(data);
+      var urlparse = Uri.parse(url);
+      http.Response response = await http.post(
+        urlparse,
+        body: body,
+        headers: {
+          "Content-Type" : "application/json"
+        }
+    );
+      print(response.body);
   }
 }

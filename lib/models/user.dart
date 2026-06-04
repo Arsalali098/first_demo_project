@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final user = userFromJson(jsonString);
 import 'dart:convert';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
@@ -19,19 +16,6 @@ class User {
     required this.skip,
     required this.limit,
   });
-
-  User copyWith({
-    List<UserElement>? users,
-    int? total,
-    int? skip,
-    int? limit,
-  }) =>
-      User(
-        users: users ?? this.users,
-        total: total ?? this.total,
-        skip: skip ?? this.skip,
-        limit: limit ?? this.limit,
-      );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     users: List<UserElement>.from(json["users"].map((x) => UserElement.fromJson(x))),

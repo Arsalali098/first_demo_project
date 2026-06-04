@@ -55,8 +55,6 @@ class _DashboardState extends State<Dashboard> {
           onPressed: () async{
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.clear();
-            // await prefs.remove(LoginState.KEYNAME);
-            // await prefs.setBool('isLoggedIn', false);
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => Login()));
           },
