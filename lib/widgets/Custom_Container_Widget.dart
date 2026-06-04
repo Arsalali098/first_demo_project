@@ -25,7 +25,7 @@ class CustomContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 260,
+      // width: 260,
       margin: const EdgeInsets.fromLTRB(0,15,0,0),
       decoration: BoxDecoration(
         color: Colors.white,

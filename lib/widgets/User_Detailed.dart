@@ -1,19 +1,15 @@
 import 'package:first_demo_project/models/user.dart';
 import 'package:flutter/material.dart';
 
-class UserDetailed extends StatefulWidget {
+class UserDetailed extends StatelessWidget {
   const UserDetailed({super.key, required this.user});
   final UserElement user;
 
   @override
-  State<UserDetailed> createState() => _UserDetailedState();
-}
-
-class _UserDetailedState extends State<UserDetailed> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      // Appbar Start
       appBar: AppBar(
         title: const Text(
           "User Details",
@@ -26,11 +22,15 @@ class _UserDetailedState extends State<UserDetailed> {
         foregroundColor: const Color(0xFF373757),
         elevation: 0,
       ),
+      // Appbar End
+
+      // Body Start
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 20),
-            // Image Avatar
+
+            // Image Avatar Start
             Center(
               child: Container(
                 padding: const EdgeInsets.all(4),
@@ -41,14 +41,16 @@ class _UserDetailedState extends State<UserDetailed> {
                 child: CircleAvatar(
                   radius: 70,
                   backgroundColor: Colors.grey[200],
-                  backgroundImage: NetworkImage(widget.user.image),
+                  backgroundImage: NetworkImage(user.image),
                 ),
               ),
             ),
             const SizedBox(height: 16),
-            // Name
+            // Image Avatar End
+
+            // Name start
             Text(
-              "${widget.user.firstName} ${widget.user.lastName}",
+              "${user.firstName} ${user.lastName}",
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -56,14 +58,16 @@ class _UserDetailedState extends State<UserDetailed> {
               ),
             ),
             const SizedBox(height: 4),
-            // Location
+            // Name End
+
+            // Location Start
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(Icons.location_on, size: 16, color: Colors.grey),
                 const SizedBox(width: 4),
                 Text(
-                  "${widget.user.address.city}, ${widget.user.address.state}",
+                  "${user.address.city}, ${user.address.state}",
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -72,6 +76,8 @@ class _UserDetailedState extends State<UserDetailed> {
               ],
             ),
             const SizedBox(height: 30),
+            // Location End
+
             // Details Grid (2 per row)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -83,20 +89,20 @@ class _UserDetailedState extends State<UserDetailed> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 children: [
-                  _buildDetailItem("Email", widget.user.email, Icons.email_outlined),
-                  _buildDetailItem("Phone", widget.user.phone, Icons.phone_outlined),
-                  _buildDetailItem("Username", widget.user.username, Icons.person_outline),
-                  _buildDetailItem("Age", widget.user.age.toString(), Icons.calendar_today_outlined),
-                  _buildDetailItem("Gender", genderValues.reverse[widget.user.gender] ?? "", Icons.transgender_outlined),
-                  _buildDetailItem("Birth Date", widget.user.birthDate, Icons.cake_outlined),
-                  _buildDetailItem("Blood Group", widget.user.bloodGroup, Icons.bloodtype_outlined),
-                  _buildDetailItem("Role", roleValues.reverse[widget.user.role] ?? "", Icons.badge_outlined),
-                  _buildDetailItem("University", widget.user.university, Icons.school_outlined),
-                  _buildDetailItem("Company", widget.user.company.name, Icons.business_outlined),
+                  _buildDetailItem("Email", user.email, Icons.email_outlined),
+                  _buildDetailItem("Phone", user.phone, Icons.phone_outlined),
+                  _buildDetailItem("Username", user.username, Icons.person_outline),
+                  _buildDetailItem("Age", user.age.toString(), Icons.calendar_today_outlined),
+                  _buildDetailItem("Gender", user.gender.name, Icons.transgender_outlined),
+                  _buildDetailItem("Birth Date", user.birthDate.toString().split(' ')[0], Icons.cake_outlined),
+                  _buildDetailItem("Blood Group", user.bloodGroup, Icons.bloodtype_outlined),
+                  _buildDetailItem("Role", user.role.name, Icons.badge_outlined),
+                  _buildDetailItem("University", user.university, Icons.school_outlined),
+                  _buildDetailItem("Company", user.company.name, Icons.business_outlined),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
           ],
         ),
       ),
