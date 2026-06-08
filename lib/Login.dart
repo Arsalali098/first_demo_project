@@ -192,6 +192,8 @@ class LoginState extends State<Login> {
           "Content-Type" : "application/json"
         }
     );
-      print(response.body);
+      final data = jsonDecode(response.body);
+      String token = data['accessToken'];
+      print( token : token);
   }
 }
